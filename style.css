@@ -1,6 +1,14 @@
+#panel {
+  position: relative; /* Sidebar positioned relative to parent */
+  width: 25%; /* Sidebar takes 25% of the screen width */
+  height: 100vh; /* Sidebar stretches vertically */
+  background-color: #f9f9f9; /* White background */
+  padding: 20px;
+  overflow-y: auto; /* Allows scrolling */
+  float: left; /* Ensures it's aligned to the left of the screen */
+}
 #map {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100%;
+  width: 75%; /* Map takes 75% of the screen width */
+  height: 100vh;
+  float: right; /* Aligns the map to the right */
 }
