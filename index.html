@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src='https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.js'></script>
-  <link href='https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.css' rel='stylesheet' />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.css" rel="stylesheet" />
   <meta charset="utf-8">
-  <title>UC Berkeley Room Availability</title>
+  <title>Room Availability Map</title>
   <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
   <style>
-    body { margin: 0; padding: 0; }
-    #map { position: absolute; top: 0; bottom: 0; width: 100%; }
-    .marker { cursor: pointer; }
+    body { margin: 0; display: flex; height: 100vh; }
+    #map { flex: 3; }
+    #panel { flex: 1; background-color: #f9f9f9; padding: 20px; overflow-y: auto; }
+    h2 { margin-top: 0; }
+    .building { margin-bottom: 20px; }
   </style>
 </head>
 <body>
+  <div id="panel">
+    <h2>Open Classrooms</h2>
+    <div id="building-list"></div>
+  </div>
   <div id="map"></div>
   <script src="app.js"></script>
 </body>
