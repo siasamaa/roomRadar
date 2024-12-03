@@ -55,40 +55,10 @@
       "latitude": "37.872979999999998"
     },
     {
-      "name": "Dwinelle Hall",
+      "name": "Dwinelle",
       "longitude": "-122.26040999999999",
       "latitude": "37.870579999999997"
-    },
-        {
-          "name": "Dwinelle 104",
-          "latitude": "37.8719",
-          "longitude": "-122.2585"
-        },
-        {
-          "name": "Dwinelle 105",
-          "latitude": "37.8720",
-          "longitude": "-122.2586"
-        },
-        {
-          "name": "Dwinelle 106",
-          "latitude": "37.8721",
-          "longitude": "-122.2587"
-        },
-        {
-          "name": "Dwinelle 109",
-          "latitude": "37.8722",
-          "longitude": "-122.2588"
-        },
-        {
-          "name": "Dwinelle 1229",
-          "latitude": "37.8723",
-          "longitude": "-122.2589"
-        },
-        {
-          "name": "Dwinelle 130",
-          "latitude": "37.8724",
-          "longitude": "-122.2590"
-        },   
+    },  
     {
       "name": "Durham Studio Theater",
       "longitude": "-122.260722",
