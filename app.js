@@ -48,6 +48,7 @@ function isRoomAvailable(schedule, day, time) {
 
 
 // Add markers and populate the side panel with open rooms
+// Add markers and populate the side panel with open rooms
 function addMarkers(map, locations, schedules) {
     const now = new Date();
     const day = now.toLocaleString('en-US', { weekday: 'long' });
@@ -87,12 +88,34 @@ function addMarkers(map, locations, schedules) {
                 return Object.keys(schedules).some(roomName => roomName === room && isRoomAvailable(schedules[roomName], day, time));
             });
 
-            console.log('Dwinelle Open Rooms:', dwinelleOpenRooms); // Log the open rooms for Dwinelle Hall
-
             if (dwinelleOpenRooms.length > 0) {
                 isBuildingOpen = true;
                 openRooms.push('Dwinelle Hall: ' + dwinelleOpenRooms.join(', '));
             }
+
+            // Special handling for Dwinelle Hall: only add it as a grouped entry
+            const div = document.createElement('div');
+            div.className = 'building';
+            div.innerHTML = `
+                <h3>${name}</h3>
+                <p>Status: Open</p>
+                <p>Open Rooms: ${dwinelleOpenRooms.join(', ')}</p>
+            `;
+            buildingList.appendChild(div);
+
+            if (isBuildingOpen) {
+                // Add green marker for open buildings
+                const color = 'green';
+                new mapboxgl.Marker({ color })
+                    .setLngLat([parseFloat(longitude), parseFloat(latitude)])
+                    .setPopup(new mapboxgl.Popup().setHTML(`
+                        <h3>${name}</h3>
+                        <p>Status: Open</p>
+                        <p>Open Rooms: ${dwinelleOpenRooms.join(', ')}</p>
+                    `))
+                    .addTo(map);
+            }
+
         } else {
             // Process other buildings normally
             Object.entries(schedules).forEach(([room, schedule]) => {
@@ -104,42 +127,42 @@ function addMarkers(map, locations, schedules) {
                     }
                 }
             });
-        }
 
-        // Only add to the side panel if the building has at least one open classroom
-        if (isBuildingOpen) {
-            // Add green marker for open buildings
-            const color = 'green';
-            new mapboxgl.Marker({ color })
-                .setLngLat([parseFloat(longitude), parseFloat(latitude)])
-                .setPopup(new mapboxgl.Popup().setHTML(`
-                    <h3>${name}</h3>
-                    <p>Status: Open</p>
-                    <p>Open Rooms: ${openRooms.join(', ')}</p>
-                `))
-                .addTo(map);
+            if (isBuildingOpen) {
+                // Add green marker for open buildings
+                const color = 'green';
+                new mapboxgl.Marker({ color })
+                    .setLngLat([parseFloat(longitude), parseFloat(latitude)])
+                    .setPopup(new mapboxgl.Popup().setHTML(`
+                        <h3>${name}</h3>
+                        <p>Status: Open</p>
+                        <p>Open Rooms: ${openRooms.join(', ')}</p>
+                    `))
+                    .addTo(map);
 
-            // Add building to the sidebar
-            const div = document.createElement('div');
-            div.className = 'building';
-
-            if (name === 'Dwinelle Hall') {
-                div.innerHTML = `<h3>Dwinelle Hall</h3><p>Status: Open</p><p>Open Rooms: ${openRooms.join(', ')}</p>`;
-            } else if (!name.includes('Dwinelle')) {
-                div.innerHTML = `<h3>${name}</h3><p>Status: Open</p><p>Open Rooms: ${openRooms.join(', ')}</p>`;
+                // Add the building to the sidebar only if it is not a Dwinelle room
+                if (!name.includes('Dwinelle')) {
+                    // Update the building list panel
+                    const div = document.createElement('div');
+                    div.className = 'building';
+                    div.innerHTML = `
+                        <h3>${name}</h3>
+                        <p>Status: Open</p>
+                        <p>Open Rooms: ${openRooms.join(', ')}</p>
+                    `;
+                    buildingList.appendChild(div);
+                }
+            } else {
+                // Add red marker for closed buildings
+                const color = 'red';
+                new mapboxgl.Marker({ color })
+                    .setLngLat([parseFloat(longitude), parseFloat(latitude)])
+                    .setPopup(new mapboxgl.Popup().setHTML(`
+                        <h3>${name}</h3>
+                        <p>Status: Closed</p>
+                    `))
+                    .addTo(map);
             }
-
-            buildingList.appendChild(div);
-        } else {
-            // Add red marker for closed buildings
-            const color = 'red';
-            new mapboxgl.Marker({ color })
-                .setLngLat([parseFloat(longitude), parseFloat(latitude)])
-                .setPopup(new mapboxgl.Popup().setHTML(`
-                    <h3>${name}</h3>
-                    <p>Status: Closed</p>
-                `))
-                .addTo(map);
         }
     });
 
