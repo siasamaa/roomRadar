@@ -38,6 +38,10 @@ async function fetchData() {
    }
 }
 
+// str -> str
+function mapRoomToBuilding(room) {
+
+}
 
 // Determine if a room is available
 function isRoomAvailable(schedule, day, time) {
@@ -75,6 +79,7 @@ function addMarkers(map, locations, schedules) {
 
        // Check if any classroom in the building is open
        Object.entries(schedules).forEach(([room, schedule]) => {
+            console.log(building)
            if (room.includes(name)) {
                const available = isRoomAvailable(schedule, day, time);
                if (available) {

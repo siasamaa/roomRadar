@@ -10,6 +10,11 @@
       "latitude": "37.873950000000001"
     },
     {
+      "name": "2547 Bowditch",
+      "longitude": "-122.25607356003545",
+      "latitude": "37.86587219610575"
+    },
+    {
       "name": "Doe Memorial Library / Library",
       "longitude": "-122.25955999999999",
       "latitude": "37.872439999999997"
@@ -68,6 +73,11 @@
       "name": "2232 Piedmont Ave.",
       "longitude": "-122.253027",
       "latitude": "37.870805"
+    },
+    {
+      "name": "2240 Piedmont Ave.",
+      "longitude": "-122.25286245299678",
+      "latitude": "37.37.87034527850433"
     },
     {
       "name": "Eshleman Hall",
@@ -230,6 +240,21 @@
       "latitude": "37.873829"
     },
     {
+      "name": "Philosophy Hall",
+      "longitude": "-122.25808383664719",
+      "latitude": "37.87103105104654"
+    },
+    {
+      "name": "Physics Building",
+      "longitude": "-122.256946827391",
+      "latitude": "37.872690919341075"
+    },
+    {
+      "name": "Social Sciences Building",
+      "longitude": "-122.25807234162342",
+      "latitude": "37.870069562352704"
+    },
+    {
       "name": "Sutardja Dai Hall / CITRIS",
       "longitude": "-122.258389",
       "latitude": "37.874822"
@@ -315,11 +340,6 @@
       "latitude": "37.87341"
     },
     {
-      "name": "Dwinelle Annex",
-      "longitude": "-122.26123",
-      "latitude": "37.870350000000002"
-    },
-    {
       "name": "Durant Hall",
       "longitude": "-122.26013",
       "latitude": "37.871259999999999"
@@ -358,6 +378,12 @@
       "name": "Anthony Hall",
       "longitude": "-122.25819",
       "latitude": "37.870690000000003"
+    },
+    {
+      "name": "Anthropology and Art Practice Building",
+      "longitude": "-122.255200",
+      "latitude": "37.869880"
+
     },
     {
       "name": "Moses Hall",
@@ -495,11 +521,6 @@
       "latitude": "37.86871000000001"
     },
     {
-      "name": "Pacific Film Archive, Berkeley Art Museum and",
-      "longitude": "-122.257529",
-      "latitude": "37.869036"
-    },
-    {
       "name": "Berkeley Art Museum and Pacific Film Archive",
       "longitude": "-122.266221",
       "latitude": "37.870942"
@@ -533,6 +554,11 @@
       "name": "Ellsworth Parking Structure",
       "longitude": "-122.262501",
       "latitude": "37.865971"
+    },
+    {
+      "name": "Molecular and Cell Biology",
+      "longitude": "-122.263250",
+      "latitude": "37.871390"
     },
     {
       "name": "Haste Street Child Development Center",
@@ -580,9 +606,21 @@
       "latitude": "37.873092"
     },
     {
+      "name": "Berkeley Way West",
+      "longitude": "-122.26839830179915",
+      "latitude": "37.87339895909958"
+
+    },
+    {
       "name": "1995 University Ave (Golden Bear Center) / Extension",
       "longitude": "-122.27127",
       "latitude": "37.871989999999997"
+    },
+    {
+      "name": "Chou Hall",
+      "longitude": "-122.25451756329295",
+      "latitude": "37.87231670160411"
+
     },
     {
       "name": "UC Berkeley Extension",
