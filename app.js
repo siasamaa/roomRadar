@@ -106,9 +106,9 @@ function addMarkers(map, locations, schedules) {
             });
         }
 
-        // Only add to the side panel if any room is open
+        // Only add to the side panel if the building has at least one open classroom
         if (isBuildingOpen) {
-            // Add marker for open buildings
+            // Add green marker for open buildings
             const color = 'green';
             new mapboxgl.Marker({ color })
                 .setLngLat([parseFloat(longitude), parseFloat(latitude)])
@@ -131,7 +131,7 @@ function addMarkers(map, locations, schedules) {
 
             buildingList.appendChild(div);
         } else {
-            // Add marker for closed buildings (for those with no open rooms)
+            // Add red marker for closed buildings
             const color = 'red';
             new mapboxgl.Marker({ color })
                 .setLngLat([parseFloat(longitude), parseFloat(latitude)])
