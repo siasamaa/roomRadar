@@ -49,30 +49,31 @@ function isRoomAvailable(schedule, day, time) {
 
 // Add markers and populate the side panel with open rooms
 function addMarkers(map, locations, schedules) {
-   const now = new Date();
-   const day = now.toLocaleString('en-US', { weekday: 'long' });
-   const time = now.toTimeString().split(' ')[0]; // Current time in HH:MM:SS format
+    const now = new Date();
+    const day = now.toLocaleString('en-US', { weekday: 'long' });
+    const time = now.toTimeString().split(' ')[0]; // Current time in HH:MM:SS format
 
+    const buildingList = document.getElementById('building-list');
 
-   const buildingList = document.getElementById('building-list');
+    // Ensure sidebar is visible
+    const panel = document.getElementById('panel');
+    if (window.getComputedStyle(panel).display === 'none') {
+        console.warn('Panel is hidden. Ensure it is visible in your CSS.');
+    }
 
+    console.log('Clearing and updating building list...');
+    buildingList.innerHTML = ''; // Clear previous entries
 
-   // Ensure sidebar is visible
-   const panel = document.getElementById('panel');
-   if (window.getComputedStyle(panel).display === 'none') {
-       console.warn('Panel is hidden. Ensure it is visible in your CSS.');
-   }
+    // Log the entire schedules object to verify structure
+    console.log('Schedules data:', schedules);
 
+    locations.forEach(location => {
+        const { name, longitude, latitude } = location;
+        let isBuildingOpen = false;
+        const openRooms = [];
 
-   console.log('Clearing and updating building list...');
-   buildingList.innerHTML = ''; // Clear previous entries
-
-
-   locations.forEach(location => {
-       const { name, longitude, latitude } = location;
-       let isBuildingOpen = false;
-       const openRooms = [];
-
+        // Log the location name to verify it's what we expect
+        console.log('Processing location:', name);
 
         if (name === 'Dwinelle Hall') {
             // Rooms for Dwinelle Hall that we want to check for availability
@@ -85,6 +86,8 @@ function addMarkers(map, locations, schedules) {
             const dwinelleOpenRooms = dwinelleRooms.filter(room => {
                 return Object.keys(schedules).some(roomName => roomName === room && isRoomAvailable(schedules[roomName], day, time));
             });
+
+            console.log('Dwinelle Open Rooms:', dwinelleOpenRooms); // Log the open rooms for Dwinelle Hall
 
             if (dwinelleOpenRooms.length > 0) {
                 isBuildingOpen = true;
@@ -116,20 +119,17 @@ function addMarkers(map, locations, schedules) {
                 `))
                 .addTo(map);
 
-            // Add the building to the sidebar only if it is not a Dwinelle room
-            if (!name.includes('Dwinelle')) {
-                // Update the building list panel
-                const div = document.createElement('div');
-                div.className = 'building';
-                div.innerHTML = `<h3>${name}</h3><p>Status: Open</p><p>Open Rooms: ${openRooms.join(', ')}</p>`;
-                buildingList.appendChild(div);
-            } else if (name == 'Dwinelle Hall') {
-                // Special handling for Dwinelle Hall: only add it as a grouped entry
-                const div = document.createElement('div');
-                div.className = 'building';
+            // Add building to the sidebar
+            const div = document.createElement('div');
+            div.className = 'building';
+
+            if (name === 'Dwinelle Hall') {
                 div.innerHTML = `<h3>Dwinelle Hall</h3><p>Status: Open</p><p>Open Rooms: ${openRooms.join(', ')}</p>`;
-                buildingList.appendChild(div);
+            } else if (!name.includes('Dwinelle')) {
+                div.innerHTML = `<h3>${name}</h3><p>Status: Open</p><p>Open Rooms: ${openRooms.join(', ')}</p>`;
             }
+
+            buildingList.appendChild(div);
         } else {
             // Add marker for closed buildings (for those with no open rooms)
             const color = 'red';
@@ -143,8 +143,9 @@ function addMarkers(map, locations, schedules) {
         }
     });
 
-   console.log('Markers and sidebar updated successfully.');
+    console.log('Markers and sidebar updated successfully.');
 }
+
 
 
 
