@@ -62,20 +62,38 @@ function addMarkers(map, locations, schedules) {
         let isBuildingOpen = false;
         const openRooms = [];
 
-        // Check if any classroom in the building is open
-        Object.entries(schedules).forEach(([room, schedule]) => {
-            if (room.includes(name)) {
-                const available = isRoomAvailable(schedule, day, time);
-                if (available) {
-                    isBuildingOpen = true;
-                    openRooms.push(room);
-                }
-            }
-        });
+        if (name === 'Dwinelle Hall') {
+            // Rooms for Dwinelle Hall that we want to check for availability
+            const dwinelleRooms = [
+                'Dwinelle 104', 'Dwinelle 105', 'Dwinelle 106', 'Dwinelle 109',
+                'Dwinelle 1229', 'Dwinelle 130'
+            ];
 
-        // Only add to the side panel if the building has at least one open classroom
+            // Filter rooms that are open in Dwinelle Hall
+            const dwinelleOpenRooms = dwinelleRooms.filter(room => {
+                return Object.keys(schedules).some(roomName => roomName === room && isRoomAvailable(schedules[roomName], day, time));
+            });
+
+            if (dwinelleOpenRooms.length > 0) {
+                isBuildingOpen = true;
+                openRooms.push('Dwinelle Hall: ' + dwinelleOpenRooms.join(', '));
+            }
+        } else {
+            // Process other buildings normally
+            Object.entries(schedules).forEach(([room, schedule]) => {
+                if (room.includes(name)) {
+                    const available = isRoomAvailable(schedule, day, time);
+                    if (available) {
+                        isBuildingOpen = true;
+                        openRooms.push(room);
+                    }
+                }
+            });
+        }
+
+        // Only add to the side panel if any room is open
         if (isBuildingOpen) {
-            // Add green marker for open buildings
+            // Add marker for open buildings
             const color = 'green';
             new mapboxgl.Marker({ color })
                 .setLngLat([parseFloat(longitude), parseFloat(latitude)])
@@ -86,13 +104,22 @@ function addMarkers(map, locations, schedules) {
                 `))
                 .addTo(map);
 
-            // Update the building list panel
-            const div = document.createElement('div');
-            div.className = 'building';
-            div.innerHTML = `<h3>${name}</h3><p>Status: Open</p><p>Open Rooms: ${openRooms.join(', ')}</p>`;
-            buildingList.appendChild(div);
+            // Add the building to the sidebar only if it is not a Dwinelle room
+            if (!name.includes('Dwinelle')) {
+                // Update the building list panel
+                const div = document.createElement('div');
+                div.className = 'building';
+                div.innerHTML = `<h3>${name}</h3><p>Status: Open</p><p>Open Rooms: ${openRooms.join(', ')}</p>`;
+                buildingList.appendChild(div);
+            } else if (name == 'Dwinelle Hall') {
+                // Special handling for Dwinelle Hall: only add it as a grouped entry
+                const div = document.createElement('div');
+                div.className = 'building';
+                div.innerHTML = `<h3>Dwinelle Hall</h3><p>Status: Open</p><p>Open Rooms: ${openRooms.join(', ')}</p>`;
+                buildingList.appendChild(div);
+            }
         } else {
-            // Add red marker for closed buildings
+            // Add marker for closed buildings (for those with no open rooms)
             const color = 'red';
             new mapboxgl.Marker({ color })
                 .setLngLat([parseFloat(longitude), parseFloat(latitude)])
@@ -106,6 +133,7 @@ function addMarkers(map, locations, schedules) {
 
     console.log('Markers and sidebar updated successfully.');
 }
+
 
 // Load data and initialize markers
 fetchData().then(({ schedules, locations }) => {
