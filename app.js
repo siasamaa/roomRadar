@@ -6,10 +6,11 @@ mapboxgl.accessToken =
 
 // Initialize the map
 const map = new mapboxgl.Map({
-  container: "map",
-  style: "mapbox://styles/siasama/cm3yuzs0000iv01qqgsaogtzl",
-  center: [-122.2595, 37.8721], // UC Berkeley center
-  zoom: 15,
+   container: 'map',
+   style: 'mapbox://styles/siasama/cm3yuzs0000iv01qqgsaogtzl',
+   center: [-122.2595, 37.8721], // UC Berkeley center
+   zoom: 15,
+   pitch: 75
 });
 
 // Define the bounding box for UC Berkeley
