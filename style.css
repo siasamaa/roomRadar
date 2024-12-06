@@ -1,58 +1,66 @@
-/* General Styling */
 body {
   margin: 0;
   display: flex;
   height: 100vh;
   font-family: Arial, sans-serif;
-}
-
-#map {
-  flex: 3;
+ }
+ 
+ 
+ #map {
+  flex: none; /* Remove flex so the map adjusts dynamically */
+  width: 65%;
   height: 100vh;
-}
-
-#panel {
-  flex: 1;
+ }
+ 
+ 
+ #panel {
+  width: 35%; /* Sidebar takes up 30% of the viewport width */
   background-color: #f9f9f9;
   padding: 20px;
   overflow-y: auto;
   border-left: 1px solid #ddd;
-}
-
-#panel h2 {
+ }
+ 
+ 
+ #panel h2 {
   margin-top: 0;
   font-size: 1.5rem;
   color: #333;
-}
-
-.building {
+ }
+ 
+ 
+ .building {
   margin-bottom: 20px;
   padding: 15px;
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.building h3 {
+ }
+ 
+ 
+ .building h3 {
   margin: 0;
   font-size: 1.25rem;
   color: #555;
   border-bottom: 1px solid #eee;
   padding-bottom: 5px;
-}
-
-.building p {
+ }
+ 
+ 
+ .building p {
   margin: 5px 0;
   font-size: 0.9rem;
   color: #666;
-}
-
-.building p strong {
+ }
+ 
+ 
+ .building p strong {
   color: #333;
-}
-
-@media (max-width: 768px) {
+ }
+ 
+ 
+ @media (max-width: 768px) {
   body {
     flex-direction: column;
   }
@@ -65,4 +73,5 @@ body {
     width: 100%;
     height: 400px;
   }
-}
+ }
+ 
